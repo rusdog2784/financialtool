@@ -21,7 +21,7 @@ def get_financial_data(ticker):
     url1 = 'http://finance.yahoo.com/quote/%s/financials?p=%s' % (ticker, ticker)
     url2 = 'http://finance.yahoo.com/quote/%s/key-statistics?p=%s' % (ticker, ticker)
     
-    chromedriver = '/Users/Scott/chromedriver'
+    chromedriver = os.getcwd() + '/chromedriver'
     os.environ['webdriver.chrome.driver'] = chromedriver
     driver = webdriver.Chrome(chromedriver)
     driver.get(url1)
