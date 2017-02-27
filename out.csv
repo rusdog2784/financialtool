@@ -1,0 +1,10 @@
+,AP,ALG,AIN,ATU,ASTE,AXR
+debt_ratio,0.0761,0.2167,0.3886,0.4058,0.0081,-0.0
+net_profit_margin,-11.3283,5.0762,10.0122,-10.4177,4.4763,-17.1235
+similar_companies,"[u'ALG', u'AIN', u'ATU', u'ASTE', u'AXR']","[u'CSS', u'FLXS', u'MRLN', u'EBF', u'WLFC']","[u'AKR', u'ABM', u'AIR', u'AIT', u'ATU']","[u'AIN', u'BGG', u'AME', u'AXE', u'AOS']","[u'APOG', u'CMCO', u'LNN', u'ALOG', u'ATU']","[u'GROW', u'ARL', u'HRT', u'MHO', u'AP']"
+inventory_turnover_ratio,3.3833,4.308,3.6668,5.1147,2.0132,0.1402
+quick_ratio,1.0623,2.8145,2.6066,1.6691,1.0034,-0.0
+working_capital_ratio,2.5593,2.9478,2.1238,3.5951,2.5892,-0.0
+return_on_equity,-0.17,0.1131,0.1429,-0.2267,0.072,-0.0911
+financial_leverage_ratio,0.2275,0.3494,0.943,1.1309,0.0108,-0.0
+current_ratio,1.6922,4.6422,3.5493,2.214,3.1049,-0.0
