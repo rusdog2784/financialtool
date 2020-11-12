@@ -14,7 +14,7 @@ def get_inventory_turnover(cost_of_revenue, inventory):
         avg_inventory = (float(inventory[0]) + float(inventory[len(inventory) - 1])) / 2.0
         inventory_turnover = cogs / avg_inventory
     else:
-        print "\t\tCompany has no revenue or inventory...   "
+        print("\t\tCompany has no revenue or inventory...   ")
     return round(inventory_turnover, 4)
 #END
 
@@ -33,7 +33,7 @@ def get_working_capital_turnover(total_revenue, current_assets, current_liabilit
         working_capital_turnover = revenue / avg_working_capital
         #working_capital_turnover = avg_working_capital / revenue
     else:
-        print "\t\tCompany has no total revenue, current assets, or current liabilities..."
+        print("\t\tCompany has no total revenue, current assets, or current liabilities...")
     return round(working_capital_turnover, 4)
 #END
 
@@ -48,7 +48,7 @@ def get_current_ratio(current_assets, current_liabilities):
     if current_assets[0] != '-' and current_liabilities != '-':
         current_ratio = current_assets[0] / current_liabilities[0]
     else:
-        print "\t\tCompany has no current assets or current liabilities..."
+        print("\t\tCompany has no current assets or current liabilities...")
     return round(current_ratio, 4)
 #END
 
@@ -63,7 +63,7 @@ def get_quick_ratio(current_assets, inventory, current_liabilities):
     if current_assets[0] != '-' and current_liabilities[0] != '-' and inventory[0] != '-':
         quick_ratio = (current_assets[0] - inventory[0]) / current_liabilities[0]
     else:
-        print "\t\tCompany has no current assets, current liabilities, or inventory..."
+        print("\t\tCompany has no current assets, current liabilities, or inventory...")
     return round(quick_ratio, 4)
 #END
 
@@ -78,7 +78,7 @@ def get_debt_ratio(long_term_debt, short_term_debt, total_assets):
     if long_term_debt[0] != '-' and short_term_debt[0] != '-' and total_assets[0] != '-':
         debt_ratio = (long_term_debt[0] + short_term_debt[0]) / total_assets[0]
     else:
-        print "\t\tCompany has no long term debt, short term debt, or total assets..."
+        print("\t\tCompany has no long term debt, short term debt, or total assets...")
     return round(debt_ratio, 4)
 #END
 
@@ -92,7 +92,7 @@ def get_financial_leverage_ratio(long_term_debt, short_term_debt, total_sharehol
     if long_term_debt[0] != '-' and short_term_debt[0] != '-' and total_shareholder_equity[0] != '-':
         financial_leverage_ratio = (long_term_debt[0] + short_term_debt[0]) / total_shareholder_equity[0]
     else:
-        print "\t\tCompany has no long term debt, short term debt, or total shareholder equity..."
+        print("\t\tCompany has no long term debt, short term debt, or total shareholder equity...")
     return round(financial_leverage_ratio, 4)
 #END
 
@@ -112,7 +112,7 @@ def get_net_profit_margin(net_income, total_revenue):
             revenue += value
         net_profit_margin = (income / revenue) * 100.0
     else:
-        print "\t\tCompany has no net income or total revenue..."
+        print("\t\tCompany has no net income or total revenue...")
     return round(net_profit_margin, 4)
 #END
 
@@ -128,7 +128,7 @@ def get_return_on_equity(net_income, total_shareholder_equity):
             income += value
         return_on_equity = income / total_shareholder_equity[0]
     else:
-        print "\t\tCompany has no net income or total shareholder equity..."
+        print("\t\tCompany has no net income or total shareholder equity...")
     return round(return_on_equity, 4)
 #END
 
@@ -145,7 +145,7 @@ def get_earnings_per_share(net_income, shares_outstanding):
             income += value
         eps = income / shares_outstanding
     else:
-        print "\t\tCompany has no net income or shares outstanding..."
+        print("\t\tCompany has no net income or shares outstanding...")
     return round(eps, 4)
 #END
 

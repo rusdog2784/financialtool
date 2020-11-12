@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
-from Tkinter import *
-import Tkinter as Tk
+import tkinter as Tk
 
 
 class Main(object):
@@ -40,13 +39,6 @@ class Main(object):
     def clicked1(self):
         ticker = self.ticker.get()
         self.label.configure(text="Gathering info for " + ticker + "...")
-
-
-
-
-
-
-
 
 
 Main()

@@ -30,7 +30,7 @@ def getFinancialInfo(ticker):
         td_title = tr.find('td', {'class':'lft'})
         if td_title != None:
             title = td_title.text.replace('\n', '')
-            print "Title: " + title
+            print("Title: " + title)
             values = []
             tds = tr.find_all('td', {'class':'r'})
             if len(tds) > 0:

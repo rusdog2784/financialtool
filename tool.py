@@ -9,21 +9,21 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
+
 def get_financial_data(ticker):
     data = {}
     financial_statements = {}
     
     #Variable declaration and setup
     yahoo = Share(ticker)
+    print("yahoo is fine...")
     income_url = 'http://www.nasdaq.com/symbol/%s/financials?query=income-statement&data=quarterly' % ticker
     cash_url = 'http://www.nasdaq.com/symbol/%s/financials?query=cash-flow&data=quarterly'
     balance_url = 'http://www.nasdaq.com/symbol/%s/financials?query=balance-sheet&data=quarterly'
     url1 = 'http://finance.yahoo.com/quote/%s/financials?p=%s' % (ticker, ticker)
     url2 = 'http://finance.yahoo.com/quote/%s/key-statistics?p=%s' % (ticker, ticker)
     
-    chromedriver = os.getcwd() + '/chromedriver'
-    os.environ['webdriver.chrome.driver'] = chromedriver
-    driver = webdriver.Chrome(chromedriver)
+    driver = webdriver.Chrome()
     driver.get(url1)
     #End
     
@@ -55,7 +55,7 @@ def get_financial_data(ticker):
     soup = BeautifulSoup(html, 'html.parser')
     table = soup.find('table', {'class':'Lh(1.7)'})
     if table == None:
-        print "\tSomething went wrong gathering the Income Statement data for " + ticker
+        print("\tSomething went wrong gathering the Income Statement data for " + ticker)
         driver.quit()
         return {}
     for tr in table.find_all('tr'):
@@ -77,7 +77,7 @@ def get_financial_data(ticker):
     soup = BeautifulSoup(html, 'html.parser')
     table = soup.find('table', {'class':'Lh(1.7)'})
     if table == None:
-        print "\tSomething went wrong gathering the Cash Flow Statement data for " + ticker
+        print("\tSomething went wrong gathering the Cash Flow Statement data for " + ticker)
         driver.quit()
         return {}
     for tr in table.find_all('tr'):
@@ -99,7 +99,7 @@ def get_financial_data(ticker):
     soup = BeautifulSoup(html, 'html.parser')
     table = soup.find('table', {'class':'Lh(1.7)'})
     if table == None:
-        print "\tSomething went wrong gathering the Balance Sheet data for " + ticker
+        print("\tSomething went wrong gathering the Balance Sheet data for " + ticker)
         driver.quit()
         return {}
     for tr in table.find_all('tr'):
@@ -154,7 +154,7 @@ def get_financial_data(ticker):
     #End
     '''
     if len(financial_statements) < 2:
-        print "\tI'm sorry, but there are no financial statements available for %s." % ticker
+        print("\tI'm sorry, but there are no financial statements available for %s." % ticker)
         driver.quit()
         return {'error':'no financial statements', 'similar_companies':similar_companies}
     driver.quit()
@@ -196,7 +196,7 @@ def data_to_csv(companies):
     for comp in companies:
         for key in rows:
             df[comp['ticker']][key] = comp['data'][key]
-    print df
+    print(df)
     df.to_csv('out.csv', sep=',')
 
 
@@ -204,28 +204,28 @@ def data_to_csv(companies):
 #Start of Program
 companies = []
 company = {}
-ticker = raw_input("Enter company ticker: ")
-print "\nGathering information for " + ticker + "..."
+ticker = input("Enter company ticker: ")
+print("\nGathering information for " + ticker + "...")
 company['ticker'] = ticker
 company['data'] = get_financial_data(ticker)
 while company['data'] == {}:
-    print "\nTrying " + ticker + " again..."
+    print("\nTrying " + ticker + " again...")
     company['data'] = get_financial_data(ticker)
 companies.append(dict(company))
 company = {}
 for ticker in companies[0]['data']['similar_companies']:
-    print "\nGathering information for " + ticker + "..."
+    print("\nGathering information for " + ticker + "...")
     company['ticker'] = ticker
     company['data'] = get_financial_data(ticker)
     if len(company['data']) != 0:
         companies.append(dict(company))
     company = {}
-print "\n\nALL DATA HAS BEEN COLLECTED.\n"
+print("\n\nALL DATA HAS BEEN COLLECTED.\n")
 
 if 'error' in companies[0]['data']:
     delete = companies[0]
     companies.remove(delete)
-    print "\n" + delete['ticker'] + " deleted due to no data."
+    print("\n" + delete['ticker'] + " deleted due to no data.")
 
 final_comps = []
 for comp in companies:
