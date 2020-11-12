@@ -16,7 +16,6 @@ def get_financial_data(ticker):
     
     #Variable declaration and setup
     yahoo = Share(ticker)
-    print("yahoo is fine...")
     income_url = 'http://www.nasdaq.com/symbol/%s/financials?query=income-statement&data=quarterly' % ticker
     cash_url = 'http://www.nasdaq.com/symbol/%s/financials?query=cash-flow&data=quarterly'
     balance_url = 'http://www.nasdaq.com/symbol/%s/financials?query=balance-sheet&data=quarterly'
