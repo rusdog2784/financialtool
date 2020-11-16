@@ -4,7 +4,7 @@ import ratios
 import requests, os, re, csv, pandas
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from yahoo_finance import Share
+from yfinance import Ticker
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
@@ -15,7 +15,7 @@ def get_financial_data(ticker):
     financial_statements = {}
     
     #Variable declaration and setup
-    yahoo = Share(ticker)
+    yahoo = Ticker(ticker)
     income_url = 'http://www.nasdaq.com/symbol/%s/financials?query=income-statement&data=quarterly' % ticker
     cash_url = 'http://www.nasdaq.com/symbol/%s/financials?query=cash-flow&data=quarterly'
     balance_url = 'http://www.nasdaq.com/symbol/%s/financials?query=balance-sheet&data=quarterly'
@@ -24,32 +24,24 @@ def get_financial_data(ticker):
     
     driver = webdriver.Chrome()
     driver.get(url1)
+    driver.implicitly_wait(5)
     #End
     
     #Setting button links
-    quarterly_button = None
-    cash_flow_button = None
-    balance_sheet_button = None
     similar_companies = []
-    div = driver.find_element_by_xpath("//div[@class='Mt(18px) Mb(14px)']")
-    all_buttons = div.find_elements_by_tag_name("button")
-    for button in all_buttons:
-        if button.text == 'Quarterly':
-            quarterly_button = button
-        elif button.text == 'Cash Flow':
-            cash_flow_button = button
-        else:
-                balance_sheet_button = button
+    balance_sheet_button = driver.find_element_by_xpath("/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[1]/div[1]/div/a[1]")
+    cash_flow_button = driver.find_element_by_xpath("/html/body/div[1]/div/div/div[1]/div/div[3]/div[1]/div/div[2]/div/div/section/div[1]/div[1]/div/a[2]")
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
-    links_div = soup.find('div', {'id':'rec-by-symbol'})
+    links_div = soup.find(id='rec-by-symbol')
+    print(links_div)
     for a in links_div.find_all('a'):
         similar_companies.append(a.text)
     data['similar_companies'] = similar_companies
     #End
 
     #Getting Income Statement Data
-    quarterly_button.click()
+    # quarterly_button.click()
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
     table = soup.find('table', {'class':'Lh(1.7)'})
@@ -171,7 +163,7 @@ def get_financial_data(ticker):
     total_shareholder_equity = financial_statements['Total Stockholder Equity']
     net_income = financial_statements['Net Income']
 #shares_outstanding = financial_statements['Shares Outstanding']
-    market_price = float(yahoo.get_price())
+    market_price = float(yahoo.info.get('previousClose'))
 
     data['inventory_turnover_ratio'] = ratios.get_inventory_turnover(cost_of_revenue, inventory)
     data['working_capital_ratio'] = ratios.get_working_capital_turnover(total_revenue, current_assets, current_liabilities)
