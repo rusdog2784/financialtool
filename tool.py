@@ -151,17 +151,17 @@ def get_financial_data(ticker):
     driver.quit()
 
     #Variables needed from financial statements:
-    cost_of_revenue = financial_statements['Cost of Revenue']
-    inventory = financial_statements['Inventory']
-    total_revenue = financial_statements['Total Revenue']
-    current_assets = financial_statements['Total Current Assets']
-    current_liabilities = financial_statements['Total Current Liabilities']
-    long_term_debt = financial_statements['Long Term Debt']
-    short_term_debt = financial_statements['Short/Current Long Term Debt']
-    total_assets = financial_statements['Total Assets']
-    total_liabilities = financial_statements['Total Liabilities']
-    total_shareholder_equity = financial_statements['Total Stockholder Equity']
-    net_income = financial_statements['Net Income']
+    cost_of_revenue = financial_statements['Cost of Revenue']                   # Income Statement
+    inventory = financial_statements['Inventory']                               # Balance Sheet - inside 'Current Assets'
+    total_revenue = financial_statements['Total Revenue']                       # Income Statement
+    current_assets = financial_statements['Total Current Assets']               # Balance Sheet - 'Current Assets'
+    current_liabilities = financial_statements['Total Current Liabilities']     # Balance Sheet - 'Current Liabilities'
+    long_term_debt = financial_statements['Long Term Debt']                     # Balance Sheet - inside 'Total Non Current Liabilities...'
+    short_term_debt = financial_statements['Short/Current Debt']                # Balance Sheet - inside 'Current Liabilities'
+    total_assets = financial_statements['Total Assets']                         # Balance Sheet - 'Total Assets'
+    total_liabilities = financial_statements['Total Liabilities']               # Balance Sheet - 'Total Liabilities Net Minority Interest' 
+    total_shareholder_equity = financial_statements['Total Stockholder Equity'] # Balance Sheet - 'Stockholders' Equity'
+    net_income = financial_statements['Net Income']                             # Income Statement - 'Net Income'
 #shares_outstanding = financial_statements['Shares Outstanding']
     market_price = float(yahoo.info.get('previousClose'))
 
